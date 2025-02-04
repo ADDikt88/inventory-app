@@ -3,6 +3,7 @@ require("dotenv").config();
 // config dotenv file
 
 const express = require("express");
+//const cors = require("cors");
 const app = express();
 const indexRouter = require("./routes/indexRouter");
 
@@ -20,5 +21,5 @@ app.use("/", indexRouter);
 //listen
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
-  console.log(`Mini message board - listening on port ${PORT}!`);
+  console.log(`Inventory App - listening on port ${PORT}!`);
 });
