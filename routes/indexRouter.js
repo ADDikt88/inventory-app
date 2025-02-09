@@ -4,11 +4,17 @@ const itemsController = require("../controllers/itemsController");
 const indexRouter = Router();
 
 //messagesRouter.get("/", messagesController.messagesListGet);
+
+//Display All Items
 indexRouter.get("/items", itemsController.itemsListGet);
 
-// messagesRouter.get("/edit/:id", messagesController.messagesUpdateGet);
-// messagesRouter.post("/edit/:id", messagesController.messagesUpdatePost);
+//Add new item
+indexRouter.post("/newItem", itemsController.newItemPost);
 
-// messagesRouter.post("/delete/:id", messagesController.messagesDeletePost);
+//Edit existing item id
+indexRouter.put("/:id", itemsController.updateItemPut);
+
+//Delete existing item id
+indexRouter.delete("/:id", itemsController.deleteItem);
 
 module.exports = indexRouter;

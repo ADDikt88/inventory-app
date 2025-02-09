@@ -16,6 +16,7 @@ app.use(express.static(assetsPath));
 //set up middleware parser
 //app.set("view engine", "ejs");
 app.use(express.urlencoded({ extended: true }));
+app.use(express.json());
 app.use("/", indexRouter);
 
 //listen
