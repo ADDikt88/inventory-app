@@ -1,17 +1,16 @@
 {
   "name": "inventory-app",
   "version": "1.0.0",
-  "description": "Inventory App",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "concurrently \"npm start --prefix server\" \"npm start --prefix client\""
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
+  "description": "",
   "dependencies": {
-    "dotenv": "^16.4.7",
-    "express": "^4.21.2",
-    "pg": "^8.13.1"
+    "concurrently": "^9.1.2"
   }
 }
