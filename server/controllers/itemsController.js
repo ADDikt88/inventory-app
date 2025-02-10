@@ -16,7 +16,7 @@ async function itemsListGet(req, res) {
 }
 
 async function newItemPost(req, res) {
-  console.log("adding a new item...");
+  console.log("adding a new item...", req.body);
   await db.insertNewItem(req.body);
   res.json({
     message: "Item added successfully",
