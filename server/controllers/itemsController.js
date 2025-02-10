@@ -18,21 +18,27 @@ async function itemsListGet(req, res) {
 async function newItemPost(req, res) {
   console.log("adding a new item...");
   await db.insertNewItem(req.body);
-  res.redirect("/items");
+  res.json({
+    message: "Item added successfully",
+  });
 }
 
 async function updateItemPut(req, res) {
   console.log("updating this item id: ", req.params.id);
   const itemId = parseInt(req.params.id, 10);
   await db.updateItem(itemId, req.body);
-  res.redirect("/items");
+  res.json({
+    message: "Item updated successfully",
+  });
 }
 
 async function deleteItem(req, res) {
   console.log("deleting this item id: ", req.params.id);
   const itemId = parseInt(req.params.id, 10);
   await db.deleteItem(itemId);
-  res.redirect("/items");
+  res.json({
+    message: "Item deleted successfully",
+  });
 }
 
 module.exports = {

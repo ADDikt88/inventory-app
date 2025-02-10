@@ -3,9 +3,18 @@ require("dotenv").config();
 // config dotenv file
 
 const express = require("express");
-//const cors = require("cors");
+const cors = require("cors");
+
 const app = express();
 const indexRouter = require("./routes/indexRouter");
+
+//Can connect on multiple local servers
+const corsOptions = {
+  origin: "http://localhost:5174",
+  methods: "GET,POST,PUT,DELETE",
+};
+
+app.use(cors(corsOptions));
 
 // const fs = require("fs");
 // const url = require("url");
