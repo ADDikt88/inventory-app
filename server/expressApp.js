@@ -10,7 +10,7 @@ const indexRouter = require("./routes/indexRouter");
 
 //Can connect on multiple local servers
 const corsOptions = {
-  origin: "http://localhost:5174",
+  origin: "http://localhost:5173",
   methods: "GET,POST,PUT,DELETE",
 };
 

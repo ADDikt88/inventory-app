@@ -2,6 +2,8 @@
 const { Router } = require("express");
 const itemsController = require("../controllers/itemsController");
 const indexRouter = Router();
+const multer = require("multer");
+const upload = multer({ dest: "uploads/" }); // Temp file storage
 
 //messagesRouter.get("/", messagesController.messagesListGet);
 
@@ -9,7 +11,11 @@ const indexRouter = Router();
 indexRouter.get("/items", itemsController.itemsListGet);
 
 //Add new item
-indexRouter.post("/newItem", itemsController.newItemPost);
+indexRouter.post(
+  "/newItem",
+  upload.single("image"),
+  itemsController.newItemPost
+);
 
 //Edit existing item id
 indexRouter.put("/:id", itemsController.updateItemPut);

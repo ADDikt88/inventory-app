@@ -1,24 +1,46 @@
 import { useState } from "react";
 import { addItem } from "../api/api.js"; // Import API function
+import FileUpload from "./FileUpload.jsx";
 
 const AddItemForm = ({ onItemAdded }) => {
-  const [name, setName] = useState("");
-  const [category, setCategory] = useState("");
-  const [dateLastUsed, setDateLastUsed] = useState("");
+  const [formData, setFormData] = useState({
+    name: "",
+    category: "",
+    dateLastUsed: "",
+    imageUrl: "", // Store uploaded image URL here
+  });
+
+  const handleChange = (e) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+  };
+
+  const handleImageUpload = (url) => {
+    setFormData({ ...formData, imageUrl: url }); // Store Cloudinary URL
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if (!name || !category || !dateLastUsed) {
+    if (!formData.name || !formData.category || !formData.dateLastUsed) {
       alert("Please fill all fields");
       return;
     }
 
-    const newItem = { name, category, image_url: "", last_used: dateLastUsed };
+    const newItem = {
+      name: formData.name,
+      category: formData.category,
+      image_url: formData.imageUrl,
+      last_used: formData.dateLastUsed,
+    };
     const addedItem = await addItem(newItem);
     onItemAdded(addedItem); // Update parent state
-    setName("");
-    setCategory("");
-    setDateLastUsed("");
+
+    // reset state of formData
+    setFormData({
+      name: "",
+      category: "",
+      dateLastUsed: "",
+      imageUrl: "",
+    });
   };
 
   return (
@@ -26,20 +48,18 @@ const AddItemForm = ({ onItemAdded }) => {
       <input
         type="text"
         placeholder="Item Name"
-        value={name}
-        onChange={(e) => setName(e.target.value)}
-      />
+        name="name"
+        onChange={handleChange}
+      />{" "}
       <input
         type="text"
         placeholder="Category"
-        value={category}
-        onChange={(e) => setCategory(e.target.value)}
-      />
-      <input
-        type="date"
-        value={dateLastUsed}
-        onChange={(e) => setDateLastUsed(e.target.value)}
-      />
+        name="category"
+        onChange={handleChange}
+      />{" "}
+      Last Used:{" "}
+      <input type="date" name="dateLastUsed" onChange={handleChange} />{" "}
+      <FileUpload OnUploadSuccess={handleImageUpload} />
       <button type="submit">Add Item</button>
     </form>
   );

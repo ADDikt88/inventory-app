@@ -8,10 +8,11 @@ async function getAllItems() {
 
 async function insertNewItem(newItem) {
   const { name, category, image_url, last_used } = newItem;
-  await pool.query(
+  const { rows } = await pool.query(
     "INSERT INTO items (name, category, image_url, last_used, time_added) VALUES ($1, $2, $3, $4, NOW()) RETURNING *",
     [name, category, image_url, last_used]
   );
+  return rows;
 }
 
 async function updateItem(id, updatedItem) {
