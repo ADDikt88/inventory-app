@@ -47,7 +47,25 @@ function ItemList({ items }) {
         {displayItems.map((item) => (
           <li key={item.id}>
             {item.id} - {item.name} - {item.category} - Last Used:{" "}
-            {item.last_used}
+            {item.last_used} -{" "}
+            {item.image_url ? (
+              <img
+                src={item.image_url}
+                alt={`${item.name}`}
+                style={{
+                  maxWidth: "100px",
+                  maxHeight: "100px",
+                  display: "inline-block",
+                  margin: "8px 0",
+                }}
+                onError={(e) => {
+                  e.target.onerror = null;
+                  e.target.src = "";
+                }}
+              />
+            ) : (
+              <span>No image available</span>
+            )}{" "}
             <button key={item.id} onClick={() => handleDelete(item.id)}>
               Delete
             </button>
