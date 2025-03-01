@@ -141,7 +141,6 @@ const AddItemForm = () => {
           name="ageRange"
           onChange={handleChange}
         />{" "}
-        Quantity:{" "}
         <input
           type="number"
           placeholder="Quantity"

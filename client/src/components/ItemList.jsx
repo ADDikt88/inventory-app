@@ -43,38 +43,77 @@ function ItemList({ items }) {
   return (
     <div>
       <h1>Current Inventory</h1>
-      <ul>
-        {displayItems.map((item) => (
-          <li key={item.id}>
-            {item.id} - {item.name} - {item.category} - {item.ageRange} -{" "}
-            {item.quantity} - {item.description}
-            Last Used: {
-              new Date(item.last_used).toISOString().split("T")[0]
-            } -{" "}
-            {item.image_url ? (
-              <img
-                src={item.image_url}
-                alt={`${item.name}`}
-                style={{
-                  maxWidth: "100px",
-                  maxHeight: "100px",
-                  display: "inline-block",
-                  margin: "8px 0",
-                }}
-                onError={(e) => {
-                  e.target.onerror = null;
-                  e.target.src = "";
-                }}
-              />
-            ) : (
-              <span>No image available</span>
-            )}{" "}
-            <button key={item.id} onClick={() => handleDelete(item.id)}>
-              Delete
-            </button>
-          </li>
-        ))}
-      </ul>
+      <table border="1" cellPadding="10">
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Category</th>
+            <th>Age Range</th>
+            <th>Quantity</th>
+            <th>Date Last Used</th>
+            <th>Description</th>
+          </tr>
+        </thead>
+        <tbody>
+          {displayItems.map((item) => (
+            <tr key={item.id}>
+              {
+                <>
+                  <td>
+                    <div className="name-image-cell">
+                      {item.name}
+                      {item.image_url ? (
+                        <img
+                          className="item-image"
+                          src={item.image_url}
+                          alt={`${item.name}`}
+                          style={{
+                            maxWidth: "100px",
+                            maxHeight: "100px",
+                            display: "inline-block",
+                            margin: "8px 0",
+                          }}
+                          onError={(e) => {
+                            e.target.onerror = null;
+                            e.target.src = "";
+                          }}
+                        />
+                      ) : (
+                        <span>No image available</span>
+                      )}
+                    </div>
+                  </td>
+                  <td>{item.category}</td>
+                  <td>{item.ageRange}</td>
+                  <td>{item.quantity}</td>
+                  <td>
+                    {new Date(item.last_used).toISOString().split("T")[0]}
+                  </td>
+                  <td>{item.description}</td>
+                </>
+              }
+              <td>
+                <div className="edit-del-cell">
+                  <button
+                    className="edit-btn"
+                    key={item.id}
+                    onClick={() => handleDelete(item.id)}
+                  >
+                    Edit
+                  </button>
+                  <button
+                    className="del-btn"
+                    key={item.id}
+                    onClick={() => handleDelete(item.id)}
+                  >
+                    Delete
+                  </button>
+                </div>
+              </td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
     </div>
   );
 }
