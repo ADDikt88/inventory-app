@@ -48,7 +48,9 @@ function ItemList({ items }) {
           <li key={item.id}>
             {item.id} - {item.name} - {item.category} - {item.ageRange} -{" "}
             {item.quantity} - {item.description}
-            Last Used: {item.last_used} -{" "}
+            Last Used: {
+              new Date(item.last_used).toISOString().split("T")[0]
+            } -{" "}
             {item.image_url ? (
               <img
                 src={item.image_url}
