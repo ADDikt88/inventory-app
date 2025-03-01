@@ -8,6 +8,9 @@ CREATE TABLE IF NOT EXISTS items (
   name TEXT NOT NULL,
   category TEXT,
   image_url TEXT,
+  age_range TEXT,
+  quantity INT DEFAULT 1 NOT NULL,
+  description TEXT,
   last_used DATE DEFAULT CURRENT_DATE,
   time_added TIMESTAMPTZ DEFAULT CURRENT_TIMESTAMP
 );

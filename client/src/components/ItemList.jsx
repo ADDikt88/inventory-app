@@ -46,8 +46,9 @@ function ItemList({ items }) {
       <ul>
         {displayItems.map((item) => (
           <li key={item.id}>
-            {item.id} - {item.name} - {item.category} - Last Used:{" "}
-            {item.last_used} -{" "}
+            {item.id} - {item.name} - {item.category} - {item.ageRange} -{" "}
+            {item.quantity} - {item.description}
+            Last Used: {item.last_used} -{" "}
             {item.image_url ? (
               <img
                 src={item.image_url}

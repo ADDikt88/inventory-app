@@ -14,6 +14,9 @@ const AddItemForm = () => {
     category: "",
     dateLastUsed: "",
     imageUrl: "", // Store uploaded image URL here
+    ageRange: "",
+    quantity: 1,
+    description: "",
   });
 
   const loadItems = async () => {
@@ -49,7 +52,7 @@ const AddItemForm = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if (!formData.name || !formData.category || !formData.dateLastUsed) {
+    if (!formData.name || !formData.category) {
       alert("Please fill all fields");
       return;
     }
@@ -96,6 +99,9 @@ const AddItemForm = () => {
       category: formData.category,
       image_url: imageUrl,
       last_used: formData.dateLastUsed,
+      age_range: formData.ageRange,
+      quantity: formData.quantity,
+      description: formData.description,
     };
     await addItem(newItem);
     await loadItems();
@@ -106,6 +112,9 @@ const AddItemForm = () => {
       category: "",
       dateLastUsed: "",
       imageUrl: "",
+      ageRange: "",
+      quantity: 1,
+      description: "",
     });
   };
 
@@ -126,6 +135,25 @@ const AddItemForm = () => {
           name="category"
           onChange={handleChange}
         />{" "}
+        <input
+          type="text"
+          placeholder="Age Range"
+          name="ageRange"
+          onChange={handleChange}
+        />{" "}
+        Quantity:{" "}
+        <input
+          type="number"
+          placeholder="Quantity"
+          name="quantity"
+          min="1"
+          onChange={handleChange}
+        />{" "}
+        <textarea
+          placeholder="Description (optional)"
+          name="description"
+          onChange={handleChange}
+        />
         Last Used:{" "}
         <input type="date" name="dateLastUsed" onChange={handleChange} />{" "}
         <input type="file" onChange={handleFileChange} />
