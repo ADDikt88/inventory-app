@@ -13,6 +13,10 @@ function ItemList({ items }) {
   const [editingItemId, setEditingItemId] = useState(null);
   const [editedItem, setEditedItem] = useState({});
 
+  //Filter mode
+  const [filterText, setFilterText] = useState("");
+  const [filterCategory, setFilterCategory] = useState("");
+
   const loadItems = async () => {
     setLoading(true);
     setError(null);
@@ -122,8 +126,61 @@ function ItemList({ items }) {
     );
   };
 
+  const handleSearch = (searchWord) => {
+    //console.log(searchWord);
+    setFilterText(searchWord);
+
+    const filtered = items.filter(
+      (item) =>
+        item.name.toLowerCase().includes(searchWord.toLowerCase()) &&
+        (filterCategory === "" || item.category === filterCategory)
+    );
+
+    setDisplayItems(filtered);
+  };
+
+  const handleCategory = (searchCategory) => {
+    //console.log(searchCategory);
+    setFilterCategory(searchCategory);
+
+    if (!searchCategory) {
+      setDisplayItems(items); // Reset to all items when no filter is applied
+      return;
+    }
+
+    const filtered = items.filter((item) => item.category === searchCategory);
+    setDisplayItems(filtered);
+  };
+
   return (
     <div>
+      {/*Filter*/}
+      <h2>Search for an item...</h2>
+      <input
+        type="text"
+        placeholder="Search by name..."
+        value={filterText}
+        onChange={(e) => {
+          handleSearch(e.target.value);
+        }}
+      />
+      <select
+        onChange={(e) => {
+          handleCategory(e.target.value);
+        }}
+        value={filterCategory}
+      >
+        <option value="">All Categories</option>
+
+        {/* create a set of category options */}
+        {[...new Set(items.map((item) => item.category))].map((category) => (
+          <option key={category} value={category}>
+            {category}
+          </option>
+        ))}
+      </select>
+
+      {/*Display table*/}
       <table border="1" cellPadding="10">
         <thead>
           <tr>
