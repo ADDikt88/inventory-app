@@ -47,7 +47,7 @@ async function updateItem(id, updatedItem) {
     description,
   } = updatedItem;
   await pool.query(
-    "UPDATE items SET name=$1, category=$2, image_url=$3, last_used=$4, age_range, quantity, description, time_added=NOW() WHERE id=$8 RETURNING *",
+    "UPDATE items SET name=$1, category=$2, image_url=$3, last_used=$4, age_range=$5, quantity=$6, description=$7, time_added=NOW() WHERE id=$8 RETURNING *",
     [
       name,
       category,

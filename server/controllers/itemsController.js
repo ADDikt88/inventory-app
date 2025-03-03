@@ -37,6 +37,7 @@ async function newItemPost(req, res) {
 async function updateItemPut(req, res) {
   console.log("updating this item id: ", req.params.id);
   const itemId = parseInt(req.params.id, 10);
+  console.log("updating with this body: ", req.body);
   const newItem = await db.updateItem(itemId, req.body);
   res.json({
     message: "Item updated successfully",

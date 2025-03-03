@@ -152,7 +152,7 @@ const AddItemForm = () => {
           placeholder="Description (optional)"
           name="description"
           onChange={handleChange}
-        />
+        />{" "}
         Last Used:{" "}
         <input type="date" name="dateLastUsed" onChange={handleChange} />{" "}
         <input type="file" onChange={handleFileChange} />
