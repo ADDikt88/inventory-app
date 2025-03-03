@@ -68,7 +68,7 @@ function ItemList({ items }) {
   const handleSave = async (item) => {
     setEditingItemId(null);
     await updateItem(item.id, item);
-    await loadItems();
+    loadItems();
   };
 
   const handleSort = (keyChoice) => {
