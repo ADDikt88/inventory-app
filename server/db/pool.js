@@ -3,7 +3,7 @@ const { Pool } = require("pg");
 const env = process.argv[2]; // 'local' or 'production'
 const connectionString =
   env === "prod"
-    ? process.env.PROD_DATABASE_URL
+    ? process.env.PROD_EXT_DATABASE_URL
     : process.env.LOCAL_DATABASE_URL;
 
 if (!connectionString) {
@@ -22,7 +22,7 @@ if (!process.env.LOCAL_DATABASE_URL) {
 // We're hardcoding them here for simplicity
 module.exports = new Pool({
   connectionString,
-  // ssl: {
-  //   rejectUnauthorized: false, // Accepts self-signed certificates. Use cautiously!
-  // },
+  ssl: {
+    rejectUnauthorized: false, // Accepts self-signed certificates. Use cautiously!
+  },
 });
