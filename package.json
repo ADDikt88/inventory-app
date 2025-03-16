@@ -7,7 +7,7 @@
     "start_dev_local": "concurrently \"node --watch server/expressApp.js local\" \"npm --prefix client run dev\"",
     "start_dev_prod": "concurrently \"node --watch server/expressApp.js prod\" \"npm --prefix client run dev\"",
     "server": "node server/expressApp.js prod",
-    "client": "npm -prefix client run build",
+    "client": "npm --prefix client run build",
     "start_prod": "concurrently \"npm run server\" \"npm run client\""
   },
   "keywords": [],
