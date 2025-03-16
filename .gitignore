@@ -8,6 +8,7 @@ package-lock.json
 
 # Environment variables
 /server/.env
+/client/.env
 .env
 
 # Build files
