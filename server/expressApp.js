@@ -4,13 +4,24 @@ require("dotenv").config();
 
 const express = require("express");
 const cors = require("cors");
+const multer = require("multer");
+const cloudinary = require("cloudinary").v2;
+
+const upload = multer({ dest: "uploads/" }); // Temporary folder for uploads
+
+cloudinary.config({
+  cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
+  api_key: process.env.CLOUDINARY_API_KEY,
+  api_secret: process.env.CLOUDINARY_API_SECRET,
+});
 
 const app = express();
 const indexRouter = require("./routes/indexRouter");
 
 //Can connect on multiple local servers
 const corsOptions = {
-  origin: "http://localhost:5173",
+  origin: ["http://localhost:5173", "https://inventory-app-xopm.onrender.com/"],
+  //credentials: true,
   methods: "GET,POST,PUT,DELETE",
 };
 
