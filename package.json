@@ -4,8 +4,11 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "concurrently \"node --watch server/expressApp.js\" \"npm --prefix client run dev\"",
-    "start_prod": "concurrently \"node --watch server/expressApp.js prod\" \"npm --prefix client run dev\""
+    "start_dev_local": "concurrently \"node --watch server/expressApp.js local\" \"npm --prefix client run dev\"",
+    "start_dev_prod": "concurrently \"node --watch server/expressApp.js prod\" \"npm --prefix client run dev\"",
+    "server": "node server/expressApp.js prod",
+    "client": "npm run start --prefix client",
+    "start_prod": "concurrently \"npm run server\" \"npm run client\""
   },
   "keywords": [],
   "author": "",
