@@ -1,4 +1,5 @@
-const API_BASE_URL = "http://localhost:3000";
+const API_BASE_URL = process.env.REACT_APP_API_BASE_URL;
+//const API_BASE_URL = "http://localhost:3000"
 
 // Fetch all items
 export const fetchItems = async () => {
