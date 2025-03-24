@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { addItem, fetchItems } from "../api/api.js"; // Import API function
 import ItemList from "./ItemList.jsx";
+import CameraCapture from "./CameraCapture.jsx";
 
 const AddItemForm = () => {
   const [items, setItems] = useState([]);
@@ -48,6 +49,10 @@ const AddItemForm = () => {
 
   const handleFileChange = (e) => {
     setFile(e.target.files[0]);
+  };
+
+  const handleCapture = (file) => {
+    handleFileChange({ target: { files: [file] } });
   };
 
   const handleSubmit = async (e) => {
@@ -155,6 +160,7 @@ const AddItemForm = () => {
         />{" "}
         Last Used:{" "}
         <input type="date" name="dateLastUsed" onChange={handleChange} />{" "}
+        <CameraCapture onCapture={handleCapture} />
         <input type="file" onChange={handleFileChange} />
         <button type="submit">Add Item</button>
       </form>
