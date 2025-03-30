@@ -9,6 +9,7 @@ const AddItemForm = () => {
   const [error, setError] = useState(null);
 
   const [file, setFile] = useState(null);
+  const [preview, setPreview] = useState(null);
 
   const [formData, setFormData] = useState({
     name: "",
@@ -48,6 +49,14 @@ const AddItemForm = () => {
   //const [imageUrl, setImageUrl] = useState("");
 
   const handleFileChange = (e) => {
+    const selectedFile = e.target.files[0];
+    if (selectedFile) {
+      setFile(selectedFile);
+
+      // Create a preview URL
+      const objectURL = URL.createObjectURL(selectedFile);
+      setPreview(objectURL);
+    }
     setFile(e.target.files[0]);
   };
 
@@ -162,6 +171,24 @@ const AddItemForm = () => {
         <input type="date" name="dateLastUsed" onChange={handleChange} />{" "}
         <CameraCapture onCapture={handleCapture} />
         <input type="file" onChange={handleFileChange} />
+        <br></br>
+        {preview && (
+          <img
+            src={preview}
+            alt="Preview"
+            style={{
+              maxWidth: "100px",
+              maxHeight: "100px",
+              display: "inline-block",
+              margin: "8px 0",
+            }}
+            onError={(e) => {
+              e.target.onerror = null;
+              e.target.src = "";
+            }}
+          />
+        )}
+        <br></br>
         <button type="submit">Add Item</button>
       </form>
       {/* Display Items */}

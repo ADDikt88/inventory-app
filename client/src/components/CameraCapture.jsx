@@ -73,6 +73,7 @@ const CameraCapture = ({ onCapture }) => {
             playsInline
             style={{ border: "1px solid black" }}
           ></video>
+          <br></br>
           <button onClick={captureImage}>Capture</button>
         </div>
       )}
