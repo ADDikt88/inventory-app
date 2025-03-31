@@ -11,6 +11,8 @@ const AddItemForm = () => {
   const [file, setFile] = useState(null);
   const [preview, setPreview] = useState(null);
 
+  const [isAdding, setIsAdding] = useState(false);
+
   const [formData, setFormData] = useState({
     name: "",
     category: "",
@@ -74,6 +76,7 @@ const AddItemForm = () => {
     //   alert("Please attach a file");
     //   return;
     // }
+    setIsAdding(true);
 
     let imageUrl = "";
     if (file) {
@@ -120,6 +123,9 @@ const AddItemForm = () => {
     await addItem(newItem);
     await loadItems();
 
+    // Reset the button
+    setIsAdding(false);
+
     // reset state of formData
     setFormData({
       name: "",
@@ -133,7 +139,7 @@ const AddItemForm = () => {
   };
 
   return (
-    <div>
+    <>
       <h1>Evelyn&apos;s Inventory</h1>
       <form onSubmit={handleSubmit}>
         <h2>Add an item below...</h2>
@@ -189,7 +195,13 @@ const AddItemForm = () => {
           />
         )}
         <br></br>
-        <button type="submit">Add Item</button>
+        <button
+          type="submit"
+          className={`${isAdding ? "addedToCart" : ""}`}
+          disabled={isAdding}
+        >
+          {isAdding ? `Item added!` : `Add Item`}
+        </button>
       </form>
       {/* Display Items */}
       {loading ? (
@@ -199,7 +211,7 @@ const AddItemForm = () => {
       ) : (
         <ItemList items={items} />
       )}
-    </div>
+    </>
   );
 };
 

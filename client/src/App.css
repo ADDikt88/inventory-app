@@ -3,6 +3,9 @@
   margin: 0 auto;
   padding: 2rem;
   text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .logo {
@@ -41,6 +44,13 @@
   color: #888;
 }
 
+form {
+  max-width: 480px;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 5px;
+}
+
 /** Table styling **/
 table {
   width: 100%;
@@ -72,7 +82,7 @@ tbody tr:nth-child(even) {
 input,
 select {
   padding: 8px;
-  margin: 5px;
+  /* margin: 5px; */
   border: 1px solid #ccc;
   border-radius: 4px;
 }
@@ -122,4 +132,16 @@ button.edit-btn:hover {
 
 .edit-del-cell > button {
   border: 1px solid black;
+}
+
+@media screen and (max-width: 500px) {
+  #root {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 2rem;
+    text-align: center;
+  }
+  .table-container {
+    display: none;
+  }
 }

@@ -153,7 +153,7 @@ function ItemList({ items }) {
   };
 
   return (
-    <div>
+    <div className="table-container">
       {/*Filter*/}
       <h2>Search for an item...</h2>
       <input
