@@ -7,9 +7,12 @@ const CameraCapture = ({ onCapture }) => {
 
   const startCamera = async () => {
     setCameraOpen(true);
+    const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+
     const stream = await navigator.mediaDevices.getUserMedia({
-      video: true,
-      //video: {facingMode: "environment"}
+      video: {
+        facingMode: isMobile ? "environment" : "user",
+      },
     });
     videoRef.current.srcObject = stream;
   };
